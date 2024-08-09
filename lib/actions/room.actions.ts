@@ -48,11 +48,11 @@ export const getDocument = async ({
   try {
     const room = await liveblocks.getRoom(roomId);
 
-    // const hasAccess = Object.keys(room.usersAccesses).includes(userId);
+    const hasAccess = Object.keys(room.usersAccesses).includes(userId);
 
-    // if (!hasAccess) {
-    //   throw new Error("You do not have access to this document");
-    // }
+    if (!hasAccess) {
+      throw new Error("You do not have access to this document");
+    }
 
     return parseStringify(room);
   } catch (error) {
@@ -147,4 +147,4 @@ export const removeCollaborator = async ({ roomId, email }: {roomId: string, ema
   } catch (error) {
     console.log(`Error happened while removing a collaborator: ${error}`);
   }
-}
+} 
